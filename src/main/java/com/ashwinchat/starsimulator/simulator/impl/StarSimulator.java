@@ -51,7 +51,7 @@ public class StarSimulator {
         BigDecimal avgCost = totalCost.divide(new BigDecimal(TOTAL_RUNS), RoundingMode.CEILING);
         averageResult.setDestroyCount(avgDestroyCount);
         averageResult.setCost(avgCost);
-        logger.info(StarUtils.formatStarString(avgCost, avgDestroyCount));
+        logger.info(StarUtils.formatStarString(averageResult));
 
         return averageResult;
     }
