@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestSuperiorStar {
+public class TestNormalStar {
     private StarSimulator simulator;
 
     @Before
@@ -16,13 +16,13 @@ public class TestSuperiorStar {
     }
     @Test
     public void testStarringDestroy() {
-        StarResult result = this.simulator.runSimulation(6, ItemType.SUPERIOR);
+        StarResult result = this.simulator.runSimulation(18, ItemType.NORMAL);
         Assert.assertTrue(result.getDestroyCount() > 0);
     }
 
     @Test
     public void testNoDestroy() {
-        StarResult result = this.simulator.runSimulation(5, ItemType.SUPERIOR);
+        StarResult result = this.simulator.runSimulation(17, ItemType.NORMAL);
         Assert.assertTrue(result.getDestroyCount() == 0);
     }
 }
