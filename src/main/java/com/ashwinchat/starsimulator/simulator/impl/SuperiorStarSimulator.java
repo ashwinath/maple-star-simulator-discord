@@ -1,13 +1,16 @@
 package com.ashwinchat.starsimulator.simulator.impl;
 
 import com.ashwinchat.starsimulator.simulator.ItemData.SuperiorItemData;
+import com.ashwinchat.starsimulator.simulator.Utils.StarUtils;
 import com.ashwinchat.starsimulator.simulator.enums.StarStatus;
 import com.ashwinchat.starsimulator.simulator.interfaces.IStarSimulator;
 import com.ashwinchat.starsimulator.simulator.pojos.ItemData;
 import com.ashwinchat.starsimulator.simulator.pojos.StarResult;
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 
@@ -16,6 +19,7 @@ public class SuperiorStarSimulator implements IStarSimulator {
 
     private static final BigDecimal COST = new BigDecimal("55832200");
     private static final int TOTAL_RUNS = 1000;
+    private static final Logger logger = Logger.getLogger(SuperiorStarSimulator.class);
 
     public static IStarSimulator getInstance() {
         return instance;
@@ -26,6 +30,7 @@ public class SuperiorStarSimulator implements IStarSimulator {
 
     @Override
     public StarResult runSimulation(int desiredStarLevel) {
+        logger.info("Starting Simulation for star level = " + desiredStarLevel);
         double totalDestroyCount = 0;
         BigDecimal totalCost = new BigDecimal(0);
         for (int i = 0; i < TOTAL_RUNS; ++i) {
@@ -34,8 +39,11 @@ public class SuperiorStarSimulator implements IStarSimulator {
             totalCost = totalCost.add(result.getCost());
         }
         StarResult averageResult = new StarResult();
-        averageResult.setDestroyCount(totalDestroyCount/TOTAL_RUNS);
-        averageResult.setCost(totalCost.divide(new BigDecimal(TOTAL_RUNS)));
+        double avgDestroyCount = totalDestroyCount / TOTAL_RUNS;
+        BigDecimal avgCost = totalCost.divide(new BigDecimal(TOTAL_RUNS), RoundingMode.CEILING);
+        averageResult.setDestroyCount(avgDestroyCount);
+        averageResult.setCost(avgCost);
+        logger.info(StarUtils.formatStarString(avgCost, avgDestroyCount));
         return averageResult;
     }
 

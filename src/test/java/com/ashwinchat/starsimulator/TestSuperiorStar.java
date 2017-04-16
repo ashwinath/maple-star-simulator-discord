@@ -1,4 +1,4 @@
-package com.ashwinchat.com.starsimulator;
+package com.ashwinchat.starsimulator;
 
 import com.ashwinchat.starsimulator.simulator.impl.SuperiorStarSimulator;
 import com.ashwinchat.starsimulator.simulator.interfaces.IStarSimulator;
@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestSuperiorStar {
-    IStarSimulator simulator;
+    private IStarSimulator simulator;
 
     @Before
     public void init() {

@@ -7,7 +7,6 @@ import java.util.List;
 
 public class SuperiorItemData {
     private static SuperiorItemData instance = new SuperiorItemData();
-    private static final int MAX_ROLL = 100000;
 
     private List<ItemData> superiorItemData;
 
@@ -33,9 +32,9 @@ public class SuperiorItemData {
         superiorItemData.add(new ItemData(3700, 0, 5355, 945));
         superiorItemData.add(new ItemData(3500, 0, 5200, 1300));
         superiorItemData.add(new ItemData(3500, 0, 4875, 1625));
-        superiorItemData.add(new ItemData(0300, 0, 485, 4850));
-        superiorItemData.add(new ItemData(0200, 0, 4900, 4900));
-        superiorItemData.add(new ItemData(0100, 0, 4950, 4950));
+        superiorItemData.add(new ItemData(300, 0, 485, 4850));
+        superiorItemData.add(new ItemData(200, 0, 4900, 4900));
+        superiorItemData.add(new ItemData(100, 0, 4950, 4950));
         return superiorItemData;
     }
 
