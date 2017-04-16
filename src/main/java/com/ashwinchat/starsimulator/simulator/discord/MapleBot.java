@@ -34,12 +34,21 @@ public class MapleBot extends ListenerAdapter {
         this.simulator = StarSimulator.getInstance();
     }
 
-    public static void main(String[] args) throws LoginException, RateLimitedException, InterruptedException {
+    public static void main(String[] args) {
         logger.info("Initialising Bot.");
-        JDA jda = new JDABuilder(AccountType.BOT)
-                .setToken(System.getenv(API_KEY_ENV))
-                .buildBlocking();
-        jda.addEventListener(new MapleBot());
+        try {
+            JDA jda = new JDABuilder(AccountType.BOT)
+                    .setToken(System.getenv(API_KEY_ENV))
+                    .buildBlocking();
+            jda.addEventListener(new MapleBot());
+        } catch (LoginException e) {
+            logger.error("Could not log in: " + e, e);
+            System.exit(-1);
+        } catch (RateLimitedException e) {
+            logger.error("Rate was limited: " + e, e);
+        } catch (InterruptedException e) {
+            logger.error("Was interrupted: " + e, e);
+        }
     }
 
     @Override
