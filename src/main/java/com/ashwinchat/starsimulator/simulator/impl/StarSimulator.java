@@ -2,6 +2,7 @@ package com.ashwinchat.starsimulator.simulator.impl;
 
 import com.ashwinchat.starsimulator.simulator.ItemData.SuperiorItemData;
 import com.ashwinchat.starsimulator.simulator.Utils.StarUtils;
+import com.ashwinchat.starsimulator.simulator.enums.ItemType;
 import com.ashwinchat.starsimulator.simulator.enums.StarStatus;
 import com.ashwinchat.starsimulator.simulator.interfaces.IStarSimulator;
 import com.ashwinchat.starsimulator.simulator.pojos.ItemData;
@@ -14,23 +15,22 @@ import java.math.RoundingMode;
 import java.util.List;
 
 
-public class SuperiorStarSimulator implements IStarSimulator {
-    private static SuperiorStarSimulator instance = new SuperiorStarSimulator();
+public class StarSimulator implements IStarSimulator {
+    private static StarSimulator instance = new StarSimulator();
 
-    private static final BigDecimal COST = new BigDecimal("55832200");
     private static final int TOTAL_RUNS = 1000;
-    private static final Logger logger = Logger.getLogger(SuperiorStarSimulator.class);
+    private static final Logger logger = Logger.getLogger(StarSimulator.class);
 
     public static IStarSimulator getInstance() {
         return instance;
     }
 
-    private SuperiorStarSimulator() {
+    private StarSimulator() {
     }
 
     @Override
-    public StarResult runSimulation(int desiredStarLevel) {
-        logger.info("Starting Simulation for star level = " + desiredStarLevel);
+    public StarResult runSimulation(int desiredStarLevel, ItemType itemType) {
+        logger.info(StarUtils.formatStartSimulation(itemType, desiredStarLevel));
         double totalDestroyCount = 0;
         BigDecimal totalCost = new BigDecimal(0);
         for (int i = 0; i < TOTAL_RUNS; ++i) {
@@ -97,7 +97,7 @@ public class SuperiorStarSimulator implements IStarSimulator {
                     status = StarStatus.ZERO;
                     break;
             }
-            totalCost = totalCost.add(COST);
+            totalCost = totalCost.add(currData.getCost());
         }
         StarResult result = new StarResult();
         result.setCost(totalCost);

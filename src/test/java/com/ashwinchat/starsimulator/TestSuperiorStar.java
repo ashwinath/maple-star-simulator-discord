@@ -1,6 +1,7 @@
 package com.ashwinchat.starsimulator;
 
-import com.ashwinchat.starsimulator.simulator.impl.SuperiorStarSimulator;
+import com.ashwinchat.starsimulator.simulator.enums.ItemType;
+import com.ashwinchat.starsimulator.simulator.impl.StarSimulator;
 import com.ashwinchat.starsimulator.simulator.interfaces.IStarSimulator;
 import com.ashwinchat.starsimulator.simulator.pojos.StarResult;
 import org.junit.Assert;
@@ -12,17 +13,17 @@ public class TestSuperiorStar {
 
     @Before
     public void init() {
-        this.simulator = SuperiorStarSimulator.getInstance();
+        this.simulator = StarSimulator.getInstance();
     }
     @Test
     public void testStarringDestroy() {
-        StarResult result = this.simulator.runSimulation(6);
+        StarResult result = this.simulator.runSimulation(6, ItemType.SUPERIOR);
         Assert.assertTrue(result.getDestroyCount() > 0);
     }
 
     @Test
     public void testNoDestroy() {
-        StarResult result = this.simulator.runSimulation(5);
+        StarResult result = this.simulator.runSimulation(5, ItemType.SUPERIOR);
         Assert.assertTrue(result.getDestroyCount() == 0);
     }
 }
