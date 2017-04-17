@@ -1,8 +1,8 @@
 package com.ashwinchat.starsimulator;
 
-import com.ashwinchat.starsimulator.simulator.enums.ItemType;
-import com.ashwinchat.starsimulator.simulator.impl.StarSimulatorImpl;
-import com.ashwinchat.starsimulator.simulator.pojos.StarResult;
+import com.ashwinchat.starsimulator.enums.ItemType;
+import com.ashwinchat.starsimulator.impl.StarSimulatorImpl;
+import com.ashwinchat.starsimulator.pojos.StarResult;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
