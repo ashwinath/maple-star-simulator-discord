@@ -20,6 +20,7 @@ public class StarSimulator {
     private static StarSimulator instance = new StarSimulator();
 
     private static final int TOTAL_RUNS = 1000;
+    private static final int NORMAL_ITEM_DESTROY_LEVEL = 12;
     private static final Logger logger = Logger.getLogger(StarSimulator.class);
 
     public static StarSimulator getInstance() {
@@ -35,13 +36,7 @@ public class StarSimulator {
         double totalDestroyCount = 0;
         BigDecimal totalCost = new BigDecimal(0);
         for (int i = 0; i < TOTAL_RUNS; ++i) {
-            IItemData data;
-            if (itemType == ItemType.NORMAL) {
-                data = NormalItemData.getInstance();
-            } else {
-                data = SuperiorItemData.getInstance();
-            }
-            StarResult result = runOneSimulation(desiredStarLevel, data);
+            StarResult result = runOneSimulation(desiredStarLevel, itemType);
             totalDestroyCount += result.getDestroyCount();
             totalCost = totalCost.add(result.getCost());
         }
@@ -56,11 +51,17 @@ public class StarSimulator {
         return averageResult;
     }
 
-    private StarResult runOneSimulation(int desiredStarLevel, IItemData data) {
+    private StarResult runOneSimulation(int desiredStarLevel, ItemType itemType) {
         int starLevel = 0;
         BigDecimal totalCost = new BigDecimal(0);
         StarStatus status = StarStatus.ZERO;
         double destroyCount = 0;
+        IItemData data;
+        if (itemType == ItemType.NORMAL) {
+            data = NormalItemData.getInstance();
+        } else {
+            data = SuperiorItemData.getInstance();
+        }
         List<ItemData> dataList = data.getItemData();
 
         while (starLevel < desiredStarLevel) {
@@ -72,7 +73,6 @@ public class StarSimulator {
                         ++starLevel;
                     } else if (rng <= currData.getSuccess()
                             + currData.getFailMaintain()) {
-                        int lol = 0 + 0;
                         // do nothing
                     } else if (rng <= currData.getSuccess()
                             + currData.getFailMaintain()
@@ -80,7 +80,11 @@ public class StarSimulator {
                         --starLevel;
                         status = StarStatus.DROPPED_ONCE;
                     } else {
-                        starLevel = 0;
+                        if (itemType == ItemType.NORMAL) {
+                            starLevel = NORMAL_ITEM_DESTROY_LEVEL;
+                        } else {
+                            starLevel = 0;
+                        }
                         ++destroyCount;
                     }
                     break;
@@ -97,7 +101,11 @@ public class StarSimulator {
                         --starLevel;
                         status = StarStatus.DROPPED_TWICE;
                     } else {
-                        starLevel = 0;
+                        if (itemType == ItemType.NORMAL) {
+                            starLevel = NORMAL_ITEM_DESTROY_LEVEL;
+                        } else {
+                            starLevel = 0;
+                        }
                         status = StarStatus.ZERO;
                         ++destroyCount;
                     }
