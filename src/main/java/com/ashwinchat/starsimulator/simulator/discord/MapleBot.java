@@ -4,19 +4,14 @@ import com.ashwinchat.starsimulator.simulator.Utils.StarUtils;
 import com.ashwinchat.starsimulator.simulator.enums.ItemType;
 import com.ashwinchat.starsimulator.simulator.impl.StarSimulator;
 import com.ashwinchat.starsimulator.simulator.pojos.StarResult;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import javax.security.auth.login.LoginException;
 
 public class MapleBot extends ListenerAdapter {
 
@@ -26,29 +21,11 @@ public class MapleBot extends ListenerAdapter {
     private static final int NORMAL_MAX_STARS = 20;
     private static final int SUPERIOR_MAX_STARS = 15;
     private static final int REASONABLE_SUPERIOR_MAX_STARS = 13;
-    private static String API_KEY_ENV = "DISCORD_API";
 
     private StarSimulator simulator;
 
-    private MapleBot() {
+    public MapleBot() {
         this.simulator = StarSimulator.getInstance();
-    }
-
-    public static void main(String[] args) {
-        logger.info("Initialising Bot.");
-        try {
-            JDA jda = new JDABuilder(AccountType.BOT)
-                    .setToken(System.getenv(API_KEY_ENV))
-                    .buildBlocking();
-            jda.addEventListener(new MapleBot());
-        } catch (LoginException e) {
-            logger.error("Could not log in: " + e, e);
-            System.exit(-1);
-        } catch (RateLimitedException e) {
-            logger.error("Rate was limited: " + e, e);
-        } catch (InterruptedException e) {
-            logger.error("Was interrupted: " + e, e);
-        }
     }
 
     @Override
