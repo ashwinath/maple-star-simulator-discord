@@ -14,6 +14,7 @@ public class TestNormalStar {
     public void init() {
         this.simulator = StarSimulatorImpl.getInstance();
     }
+
     @Test
     public void testStarringDestroy() {
         StarResult result = this.simulator.runSimulation(18, ItemType.NORMAL);
