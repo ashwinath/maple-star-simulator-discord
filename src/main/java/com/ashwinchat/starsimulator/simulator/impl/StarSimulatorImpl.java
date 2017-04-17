@@ -16,18 +16,18 @@ import java.math.RoundingMode;
 import java.util.List;
 
 
-public class StarSimulator {
-    private static StarSimulator instance = new StarSimulator();
+public class StarSimulatorImpl {
+    private static StarSimulatorImpl instance = new StarSimulatorImpl();
 
     private static final int TOTAL_RUNS = 1000;
     private static final int NORMAL_ITEM_DESTROY_LEVEL = 12;
-    private static final Logger logger = Logger.getLogger(StarSimulator.class);
+    private static final Logger logger = Logger.getLogger(StarSimulatorImpl.class);
 
-    public static StarSimulator getInstance() {
+    public static StarSimulatorImpl getInstance() {
         return instance;
     }
 
-    private StarSimulator() {
+    private StarSimulatorImpl() {
     }
 
     public StarResult runSimulation(int desiredStarLevel, ItemType itemType) {
