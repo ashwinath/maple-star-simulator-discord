@@ -21,6 +21,7 @@ jar {
 }
 
 dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.10.Final'
     compile group: 'org.telegram', name: 'telegrambots', version: '2.4.4.5'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'

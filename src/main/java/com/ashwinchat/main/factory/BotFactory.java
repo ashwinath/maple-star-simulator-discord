@@ -1,4 +1,4 @@
-package com.ashwinchat.starsimulator.bots.factory;
+package com.ashwinchat.main.factory;
 
 import com.ashwinchat.starsimulator.bots.discord.MapleDiscordBot;
 import com.ashwinchat.starsimulator.bots.telegram.MapleTelegramBot;

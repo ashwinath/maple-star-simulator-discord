@@ -1,6 +1,6 @@
 package com.ashwinchat.main;
 
-import com.ashwinchat.starsimulator.bots.factory.BotFactory;
+import com.ashwinchat.main.factory.BotFactory;
 import org.apache.log4j.Logger;
 
 public class MainApplication {
