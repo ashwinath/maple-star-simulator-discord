@@ -27,7 +27,7 @@ public class ScrollSimulatorImpl {
         logger.info("Starting scrolling simulation for " + numberOfUpgradeSlots + " slots, diligence level = " + diligenceLevel);
         int successChance = BASE_15_SCROLL_SUCCESS_RATE + (int)(diligenceLevel / 10);
         Map<Integer, ScrollResult> resultMap = new TreeMap();
-        for (int innoThresHold = 0; innoThresHold < numberOfUpgradeSlots; ++innoThresHold) {
+        for (int innoThresHold = 0; innoThresHold < numberOfUpgradeSlots || innoThresHold < 10; ++innoThresHold) {
             logger.info("Starting simulation for inno threshold level of " + innoThresHold);
             ScrollResult resultAtThreshold = runSimulationAtInnoThresHold(innoThresHold, numberOfUpgradeSlots, successChance);
             resultMap.put(innoThresHold, resultAtThreshold);

@@ -55,6 +55,8 @@ public class MessageHandlerImpl {
                 int diligenceLevel = Integer.parseInt(userInput[2]);
                 if (numberOfUpgrades < 0 || diligenceLevel < 0) {
                     messageToSend = "Please enter numbers greater than 0.";
+                } else if (numberOfUpgrades > 12) {
+                    messageToSend = "Please enter a upgrade level lower than 13";
                 } else {
                     logger.info(ScrollUtils.formatStartSimulation(numberOfUpgrades, diligenceLevel));
                     Map<Integer, ScrollResult> resultMap = scrollSimulator.runSimulation(numberOfUpgrades, diligenceLevel);
